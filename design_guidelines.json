@@ -1,0 +1,143 @@
+{
+  "identity": {
+    "name": "E1",
+    "mission": "Create a distinct, high-trust B2B aesthetic that blends 'Scientific Precision' with 'Human Warmth'. Avoid generic SaaS tropes.",
+    "principles": [
+      "Fusion over Imitation: Mix Architectural Precision with Organic Shapes.",
+      "Content is King: Every section tells a story of 'Smart Services, Balanced Lives'.",
+      "Negative Space: Use whitespace as a luxury element.",
+      "Contrast: High contrast for readability and authority."
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Outfit, sans-serif",
+      "body": "Inter, sans-serif",
+      "accent": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl font-bold tracking-tight leading-none",
+      "h2": "text-4xl md:text-5xl font-semibold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "body_lg": "text-lg md:text-xl leading-relaxed text-slate-600",
+      "body": "text-base leading-relaxed text-slate-600",
+      "caption": "text-sm font-medium tracking-wide uppercase text-slate-500"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap');"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": "#1A365B",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#70E252",
+      "secondary_foreground": "#0F291E",
+      "accent": "#2B4F79",
+      "background": "#FFFFFF",
+      "surface": "#F8FAFC",
+      "surface_highlight": "#F1F5F9",
+      "text_main": "#0F172A",
+      "text_muted": "#64748B",
+      "border": "#E2E8F0"
+    },
+    "usage_rules": [
+      "Use Navy (#1A365B) for strong typographic hierarchy and footer backgrounds.",
+      "Use Green (#70E252) sparingly for CTAs and high-value accents (icons, progress bars).",
+      "Backgrounds should be primarily White (#FFFFFF) or very light Slate (#F8FAFC).",
+      "Avoid large blocks of Teal (#2B4F79); use it for secondary buttons or illustrations."
+    ]
+  },
+  "layout": {
+    "spacing": {
+      "container_padding": "px-6 md:px-12 lg:px-24",
+      "section_spacing": "py-20 md:py-32",
+      "element_spacing": "gap-8 md:gap-12"
+    },
+    "grid_system": {
+      "mode": "Bento Grid Mode A (Tetris)",
+      "description": "Asymmetrical grid for services and features to create visual interest.",
+      "implementation": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    },
+    "containers": {
+      "max_width": "max-w-7xl mx-auto",
+      "hero_split": "grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#1A365B] text-white hover:bg-[#2B4F79] rounded-full px-8 py-4 font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-1",
+      "secondary": "bg-[#70E252] text-[#0F291E] hover:bg-[#86EFAC] rounded-full px-8 py-4 font-medium transition-all shadow-md hover:shadow-lg",
+      "outline": "border-2 border-[#1A365B] text-[#1A365B] hover:bg-[#F1F5F9] rounded-full px-8 py-4 font-medium transition-all"
+    },
+    "cards": {
+      "service_card": "bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-[#70E252]/30 transition-all duration-300 group",
+      "feature_card": "bg-slate-50 p-6 rounded-xl border border-transparent hover:bg-white hover:shadow-md transition-all"
+    },
+    "navbar": {
+      "style": "fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl bg-white/80 backdrop-blur-xl border border-white/20 rounded-full shadow-sm z-50 px-6 py-3 flex items-center justify-between transition-all"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-white/70 border border-white/20 shadow-sm",
+    "gradients": "Subtle mesh gradients in backgrounds (Opacity 5-10%) using brand colors.",
+    "shadows": "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+    "radius": "rounded-2xl"
+  },
+  "motion": {
+    "library": "framer-motion",
+    "defaults": {
+      "duration": 0.5,
+      "ease": "easeOut"
+    },
+    "entrance": "initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}"
+  },
+  "images": {
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1765046255517-412341954c4c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGxpZ2h0JTIwbmV0d29yayUyMGNvbm5lY3Rpb24lMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcxMzUzMzUwfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract white wave network pattern"
+    },
+    "services": {
+      "ai_ml": {
+        "url": "https://images.unsplash.com/photo-1737505599159-5ffc1dcbc08f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwdGVjaG5vbG9neSUyMGJyYWluJTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3MTM1MzM1Mnww&ixlib=rb-4.1.0&q=85",
+        "alt": "AI Brain Circuit"
+      },
+      "data_analytics": {
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkJTIwbW9uaXRvciUyMHNjcmVlbiUyMGNsb3NldXB8ZW58MHx8fHwxNzcxMzUzMzUxfDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Data Analytics Graphs"
+      },
+      "web_dev": {
+         "url": "https://images.unsplash.com/photo-1541415534056-fad380cd68a5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGxpZ2h0JTIwbmV0d29yayUyMGNvbm5lY3Rpb24lMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzcxMzUzMzUwfDA&ixlib=rb-4.1.0&q=85",
+         "alt": "Abstract Code Structure"
+      }
+    },
+    "locations": {
+      "dublin": "https://images.unsplash.com/photo-1758642623034-3ea5aa8ff6c9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxkdWJsaW4lMjBpcmVsYW5kJTIwbW9kZXJuJTIwYnJpZGdlJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc3MTM1MzM1OXww&ixlib=rb-4.1.0&q=85",
+      "new_york": "https://images.unsplash.com/photo-1714153010191-df59dd127ac4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmUlMjBzdW5ueSUyMGRheXxlbnwwfHx8fDE3NzEzNTMzNTl8MA&ixlib=rb-4.1.0&q=85",
+      "bangalore": "https://images.unsplash.com/photo-1555238920-7a6bea18473b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBnbGFzcyUyMG9mZmljZSUyMGJ1aWxkaW5nJTIwYmx1ZSUyMHNreXxlbnwwfHx8fDE3NzEzNTMzNjd8MA&ixlib=rb-4.1.0&q=85"
+    },
+    "about": {
+      "team_collab": "https://images.unsplash.com/photo-1758520144427-ddb02ac74e9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBzaGFraW5nJTIwaGFuZHMlMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNzcxMzUzMzY2fDA&ixlib=rb-4.1.0&q=85"
+    },
+    "logo": "https://customer-assets.emergentagent.com/job_5a814ac5-8809-40fc-9b70-23556389f011/artifacts/hvex155g_PyrunAi_FullLogo.png"
+  },
+  "instructions_to_main_agent": [
+    "Install 'framer-motion' and 'lucide-react' if not present.",
+    "Update tailwind.config.js with the new color palette and font family.",
+    "Create a 'Layout' component that includes the Navbar and Footer.",
+    "Use the Bento Grid strategy for the Services section.",
+    "Ensure all interactive elements have data-testid attributes.",
+    "Use the specific image URLs provided for each section.",
+    "Strictly follow the Light Theme mandate (no dark mode toggle needed, enforce light mode in class strategy)."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Avoid 'AI slop' aesthetics (generic gradients, centered text only).",
+    "Use 2-3x more spacing than typical.",
+    "Micro-animations on hover are mandatory.",
+    "Use Lucide React icons for UI elements.",
+    "Ensure contrast ratios meet WCAG AA standards (4.5:1 for normal text).",
+    "Do NOT use 'Inter' for headings; use 'Outfit'.",
+    "Do NOT use gradients for text.",
+    "Do NOT use pure #000000; use #0F172A (Slate-900) for black."
+  ]
+}
