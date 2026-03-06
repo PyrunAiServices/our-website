@@ -9,9 +9,9 @@ from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Content
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
@@ -54,13 +54,16 @@ class ContactResponse(BaseModel):
     message: str
 
 
-def send_email_via_sendgrid(name: str, email: str, company: str, message: str, preferred_date: str = None, preferred_time: str = None):
-    api_key = os.environ.get('SENDGRID_API_KEY')
-    sender_email = os.environ.get('SENDER_EMAIL', 'noreply@pyrunai.com')
-    recipient_email = os.environ.get('RECIPIENT_EMAIL', 'info@pyrunai.com')
+def send_email(name: str, email: str, company: str, message: str, preferred_date: str = None, preferred_time: str = None):
+    smtp_server = os.environ.get('SMTP_SERVER')
+    smtp_port = int(os.environ.get('SMTP_PORT', 587))
+    smtp_username = os.environ.get('SMTP_USERNAME')
+    smtp_password = os.environ.get('SMTP_PASSWORD')
+    sender_email = os.environ.get('SENDER_EMAIL', smtp_username)
+    recipient_email = os.environ.get('RECIPIENT_EMAIL')
 
-    if not api_key:
-        logger.warning("SendGrid API key not configured, skipping email send")
+    if not all([smtp_server, smtp_username, smtp_password, recipient_email]):
+        logger.warning("SMTP configuration is missing. Cannot send email.")
         return False
 
     booking_row = ""
@@ -106,20 +109,22 @@ def send_email_via_sendgrid(name: str, email: str, company: str, message: str, p
     </html>
     """
 
-    msg = Mail(
-        from_email=sender_email,
-        to_emails=recipient_email,
-        subject=f"New Demo Request from {name} - {company or 'Individual'}",
-        html_content=html_content
-    )
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = f"New Demo Request from {name} - {company or 'Individual'}"
+    msg.attach(MIMEText(html_content, 'html'))
 
     try:
-        sg = SendGridAPIClient(api_key)
-        response = sg.send(msg)
-        logger.info(f"Email sent successfully. Status: {response.status_code}")
-        return response.status_code == 202
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_username, smtp_password)
+        server.send_message(msg)
+        server.quit()
+        logger.info("Email sent successfully via SMTP.")
+        return True
     except Exception as e:
-        logger.error(f"SendGrid email failed: {str(e)}")
+        logger.error(f"SMTP email failed: {str(e)}")
         return False
 
 
@@ -143,7 +148,7 @@ async def submit_contact(request: ContactRequest, background_tasks: BackgroundTa
     await db.contact_submissions.insert_one(doc)
 
     background_tasks.add_task(
-        send_email_via_sendgrid,
+        send_email,
         request.name,
         request.email,
         request.company or "",
