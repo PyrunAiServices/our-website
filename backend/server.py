@@ -1,34 +1,42 @@
-from fastapi import FastAPI, APIRouter, HTTPException, BackgroundTasks
+from fastapi import FastAPI, APIRouter, BackgroundTasks
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, EmailStr
-from typing import List, Optional
+from pydantic import BaseModel, Field
+from typing import Optional
 import uuid
 from datetime import datetime, timezone
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
 
-mongo_url = os.environ['MONGO_URL']
+
+# -----------------------------
+# ENVIRONMENT SETUP
+# -----------------------------
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / ".env")
+
+mongo_url = os.environ["MONGO_URL"]
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.environ["DB_NAME"]]
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
 
+# -----------------------------
+# MODELS
+# -----------------------------
 class ContactSubmission(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
@@ -37,7 +45,9 @@ class ContactSubmission(BaseModel):
     message: str
     preferred_date: Optional[str] = None
     preferred_time: Optional[str] = None
-    timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    timestamp: str = Field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
 
 class ContactRequest(BaseModel):
@@ -54,87 +64,114 @@ class ContactResponse(BaseModel):
     message: str
 
 
-def send_email(name: str, email: str, company: str, message: str, preferred_date: str = None, preferred_time: str = None):
-    smtp_server = os.environ.get('SMTP_SERVER')
-    smtp_port = int(os.environ.get('SMTP_PORT', 587))
-    smtp_username = os.environ.get('SMTP_USERNAME')
-    smtp_password = os.environ.get('SMTP_PASSWORD')
-    sender_email = os.environ.get('SENDER_EMAIL', smtp_username)
-    recipient_email = os.environ.get('RECIPIENT_EMAIL')
+# -----------------------------
+# EMAIL FUNCTION
+# -----------------------------
+def send_email(
+    name: str,
+    email: str,
+    company: str,
+    message: str,
+    preferred_date: str = None,
+    preferred_time: str = None,
+):
 
-    if not all([smtp_server, smtp_username, smtp_password, recipient_email]):
-        logger.warning("SMTP configuration is missing. Cannot send email.")
+    smtp_server = os.environ.get("SMTP_SERVER")
+    smtp_port = int(os.environ.get("SMTP_PORT", 587))
+    smtp_username = os.environ.get("SMTP_USERNAME")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+
+    sender_email = os.environ.get("SENDER_EMAIL", smtp_username)
+    admin_email = os.environ.get("RECIPIENT_EMAIL")
+
+    if not all([smtp_server, smtp_username, smtp_password, admin_email]):
+        logger.warning("SMTP configuration missing.")
         return False
-
-    booking_row = ""
-    if preferred_date and preferred_time:
-        booking_row = f"""
-                <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold; color: #1A365B;">Preferred Slot:</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; color: #334E68;"><strong style="color: #70E252;">{preferred_date} at {preferred_time} IST</strong> (30 min)</td>
-                </tr>
-        """
-
-    html_content = f"""
-    <html>
-    <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="background: #1A365B; padding: 24px; border-radius: 12px 12px 0 0;">
-            <h2 style="color: #FFFFFF; margin: 0;">New Demo Booking from PyrunAi Website</h2>
-        </div>
-        <div style="background: #F8FAFC; padding: 24px; border: 1px solid #E2E8F0; border-top: none; border-radius: 0 0 12px 12px;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold; color: #1A365B; width: 140px;">Name:</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; color: #334E68;">{name}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold; color: #1A365B;">Email:</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; color: #334E68;"><a href="mailto:{email}">{email}</a></td>
-                </tr>
-                <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; font-weight: bold; color: #1A365B;">Company:</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E2E8F0; color: #334E68;">{company or 'Not provided'}</td>
-                </tr>
-                {booking_row}
-                <tr>
-                    <td style="padding: 12px 0; font-weight: bold; color: #1A365B; vertical-align: top;">Message:</td>
-                    <td style="padding: 12px 0; color: #334E68;">{message}</td>
-                </tr>
-            </table>
-        </div>
-        <p style="color: #64748B; font-size: 12px; margin-top: 16px; text-align: center;">
-            This email was sent from the PyrunAi website booking form.
-        </p>
-    </body>
-    </html>
-    """
-
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = recipient_email
-    msg['Subject'] = f"New Demo Request from {name} - {company or 'Individual'}"
-    msg.attach(MIMEText(html_content, 'html'))
 
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
         server.login(smtp_username, smtp_password)
-        server.send_message(msg)
+
+        # -----------------------------
+        # EMAIL TO ADMIN
+        # -----------------------------
+        admin_html = f"""
+        <h2>New Demo Booking from PyrunAI Website</h2>
+
+        <b>Name:</b> {name}<br>
+        <b>Email:</b> {email}<br>
+        <b>Company:</b> {company or "Not provided"}<br><br>
+
+        <b>Message:</b><br>
+        {message}<br><br>
+
+        Preferred Slot: {preferred_date or "N/A"} {preferred_time or ""}
+        """
+
+        admin_msg = MIMEMultipart()
+        admin_msg["From"] = sender_email
+        admin_msg["To"] = admin_email
+        admin_msg["Subject"] = f"New Demo Request from {name}"
+
+        admin_msg.attach(MIMEText(admin_html, "html"))
+        server.send_message(admin_msg)
+
+        # -----------------------------
+        # EMAIL TO USER
+        # -----------------------------
+        user_html = f"""
+        <h2>Thank you for contacting PyrunAI 🚀</h2>
+
+        Hi {name},<br><br>
+
+        Your demo request has been received successfully.
+
+        Our team will review your request and contact you within
+        <b>24 hours</b>.
+
+        <br><br>
+
+        <b>Your Message:</b><br>
+        {message}
+
+        <br><br>
+
+        Best Regards,<br>
+        <b>PyrunAI Team</b><br>
+        info@pyrunai.com
+        """
+
+        user_msg = MIMEMultipart()
+        user_msg["From"] = sender_email
+        user_msg["To"] = email
+        user_msg["Subject"] = "Your PyrunAI demo request has been received"
+
+        user_msg.attach(MIMEText(user_html, "html"))
+        server.send_message(user_msg)
+
         server.quit()
-        logger.info("Email sent successfully via SMTP.")
+
+        logger.info("Admin + User emails sent successfully")
+
         return True
+
     except Exception as e:
-        logger.error(f"SMTP email failed: {str(e)}")
+        logger.error(f"Email failed: {str(e)}")
         return False
 
 
+# -----------------------------
+# ROUTES
+# -----------------------------
 @api_router.get("/")
 async def root():
-    return {"message": "PyrunAi API is running"}
+    return {"message": "PyrunAI API is running"}
 
 
 @api_router.post("/contact", response_model=ContactResponse)
 async def submit_contact(request: ContactRequest, background_tasks: BackgroundTasks):
+
     submission = ContactSubmission(
         name=request.name,
         email=request.email,
@@ -145,6 +182,7 @@ async def submit_contact(request: ContactRequest, background_tasks: BackgroundTa
     )
 
     doc = submission.model_dump()
+
     await db.contact_submissions.insert_one(doc)
 
     background_tasks.add_task(
@@ -159,7 +197,7 @@ async def submit_contact(request: ContactRequest, background_tasks: BackgroundTa
 
     return ContactResponse(
         status="success",
-        message="Thank you! Your demo request has been submitted. We'll get back to you within 24 hours."
+        message="Thank you! Your demo request has been submitted. Our team will contact you within 24 hours.",
     )
 
 
@@ -171,15 +209,22 @@ async def get_submissions():
 
 app.include_router(api_router)
 
+
+# -----------------------------
+# CORS
+# -----------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=os.environ.get("CORS_ORIGINS", "*").split(","),
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+# -----------------------------
+# SHUTDOWN EVENT
+# -----------------------------
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
