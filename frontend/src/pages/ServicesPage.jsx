@@ -61,7 +61,7 @@ const services = [
     color: "bg-blue-50 text-blue-600",
     borderColor: "hover:border-blue-200",
     heroImg: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/embed/aircAruvnKk",
+    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
     features: [
       { icon: Cpu, text: "Custom ML Model Development" },
       { icon: Workflow, text: "NLP & Text Analytics" },
@@ -98,7 +98,7 @@ const services = [
     color: "bg-emerald-50 text-emerald-600",
     borderColor: "hover:border-emerald-200",
     heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/embed/yZvFH7B6gKI",
+    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
     features: [
       { icon: Database, text: "ETL Pipeline Design" },
       { icon: LineChart, text: "Real-time Dashboards" },
@@ -135,7 +135,7 @@ const services = [
     color: "bg-amber-50 text-amber-600",
     borderColor: "hover:border-amber-200",
     heroImg: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/embed/bMknfKXIFA8",
+    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
     features: [
       { icon: Monitor, text: "Modern Web Applications" },
       { icon: Smartphone, text: "Mobile App Development" },
@@ -172,7 +172,7 @@ const services = [
     color: "bg-violet-50 text-violet-600",
     borderColor: "hover:border-violet-200",
     heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/embed/TmhQCQr_DCA",
+    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
     features: [
       { icon: FileBarChart, text: "Interactive Dashboards" },
       { icon: Database, text: "Data Modeling & DAX" },
@@ -203,7 +203,7 @@ const services = [
 ];
 
 export default function ServicesPage() {
-  const [videoUrl, setVideoUrl] = useState(null);
+  const [Url, setVideoUrl] = useState(null);
 
   return (
     <>
