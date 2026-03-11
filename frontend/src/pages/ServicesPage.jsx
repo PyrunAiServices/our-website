@@ -20,6 +20,11 @@ const stagger = {
   viewport: { once: true },
 };
 
+// Detects if a URL is a local video file or a remote embed (YouTube, etc.)
+function isLocalVideo(url) {
+  return url && (url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".ogg"));
+}
+
 function VideoModal({ url, onClose }) {
   return (
     <motion.div
@@ -36,20 +41,36 @@ function VideoModal({ url, onClose }) {
         className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} data-testid="video-modal-close" className="absolute top-3 right-3 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors">
+        <button
+          onClick={onClose}
+          data-testid="video-modal-close"
+          className="absolute top-3 right-3 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
+        >
           <X size={20} />
         </button>
-        <iframe
-          src={url}
-          title="Service video"
-          className="w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+
+        {isLocalVideo(url) ? (
+          <video
+            src={url}
+            className="w-full h-full"
+            controls
+            autoPlay
+          />
+        ) : (
+          <iframe
+            src={url}
+            title="Service video"
+            className="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        )}
       </motion.div>
     </motion.div>
   );
 }
+
+const INTRO_VIDEO = "/images/PyrunAi intro.mp4";
 
 const services = [
   {
@@ -61,7 +82,7 @@ const services = [
     color: "bg-blue-50 text-blue-600",
     borderColor: "hover:border-blue-200",
     heroImg: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
-    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
+    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Cpu, text: "Custom ML Model Development" },
       { icon: Workflow, text: "NLP & Text Analytics" },
@@ -98,7 +119,7 @@ const services = [
     color: "bg-emerald-50 text-emerald-600",
     borderColor: "hover:border-emerald-200",
     heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
+    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Database, text: "ETL Pipeline Design" },
       { icon: LineChart, text: "Real-time Dashboards" },
@@ -115,13 +136,13 @@ const services = [
       {
         title: "Python-Based Stock Performance Analysis of Major Banks",
         img: "/images/Python-Based Stock Performance Analysis of Major Banks.png",
-        desc: "An end-to-end financial analytics project analyzing top bank stocks and presenting key KPIs: average price growth, sharpest market drop, yearly performance metrics, and return-on-investment benchmarks. Time-series visualizations reveal actionable investment insights.",
+        desc: "An end-to-end financial analytics project analyzing top bank stocks and presenting key KPIs: average price growth, sharpest market drop, yearly performance metrics, and return-on-investment benchmarks.",
         link: null,
       },
       {
         title: "Supply Chain Delay & Optimization Analytics",
         img: "/images/Supply Chain Delay & Optimization Analytics.png",
-        desc: "An intelligence system designed to improve supply chain efficiency by analyzing delivery timelines, route dependencies, and vendor reliability. Key KPIs like average delay time, on-time delivery rate, vendor success ratio, and logistics bottleneck frequency are evaluated to uncover hidden inefficiencies and optimize planning, procurement, and scheduling.",
+        desc: "An intelligence system designed to improve supply chain efficiency by analyzing delivery timelines, route dependencies, and vendor reliability. Key KPIs like average delay time, on-time delivery rate, vendor success ratio, and logistics bottleneck frequency are evaluated to uncover hidden inefficiencies.",
         link: null,
       },
     ],
@@ -135,7 +156,7 @@ const services = [
     color: "bg-amber-50 text-amber-600",
     borderColor: "hover:border-amber-200",
     heroImg: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
-    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
+    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Monitor, text: "Modern Web Applications" },
       { icon: Smartphone, text: "Mobile App Development" },
@@ -172,7 +193,7 @@ const services = [
     color: "bg-violet-50 text-violet-600",
     borderColor: "hover:border-violet-200",
     heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: "frontend/public/images/PyrunAi intro.mp4",
+    videoUrl: INTRO_VIDEO,
     features: [
       { icon: FileBarChart, text: "Interactive Dashboards" },
       { icon: Database, text: "Data Modeling & DAX" },
@@ -183,19 +204,19 @@ const services = [
       {
         title: "Applicant Tracking System Performance Dashboard",
         img: "/images/Submission Report.png",
-        desc: "A powerful recruitment analytics dashboard that provides complete visibility into the hiring process. It tracks application volume, candidate quality, recruiter output, and overall hiring efficiency, helping organizations reduce hiring delays, improve talent acquisition performance, and refine sourcing strategies.",
+        desc: "A powerful recruitment analytics dashboard that provides complete visibility into the hiring process. It tracks application volume, candidate quality, recruiter output, and overall hiring efficiency.",
         link: "https://app.powerbi.com/view?r=eyJrIjoiMDYwZTQyMTEtMWIzMS00NDY2LWFjMGMtZTFjNmVmZDc1YzI2IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9",
       },
       {
         title: "USA Real-Estate Market Analytics Dashboard",
         img: "/images/USA RealEstate.png",
-        desc: "A visually rich dashboard designed to support real-estate investment decisions. It highlights pricing trends, market hotspots, inventory distribution, and investment-worthy regions across the USA, empowering businesses with accurate and actionable market intelligence.",
+        desc: "A visually rich dashboard designed to support real-estate investment decisions. It highlights pricing trends, market hotspots, inventory distribution, and investment-worthy regions across the USA.",
         link: "https://app.powerbi.com/view?r=eyJrIjoiOGE1MTIxMzYtZTQ1Ni00MjkwLWIwOWItYTBiNjYyY2IwMGM4IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&pageName=9da571941c89c6b47031",
       },
       {
         title: "Customer Segmentation & Spend Analysis (Credit Cards)",
         img: "/images/CreditCard.png",
-        desc: "A powerful analytics dashboard that uncovers how customers use their credit cards, revealing patterns in spending behavior, delinquency risk, credit utilization, and customer profitability. Key insights include: 42% of customers showing high utilization, 18% falling into potential delinquency, and top 12% contributing nearly 60% of total revenue.",
+        desc: "A powerful analytics dashboard that uncovers how customers use their credit cards, revealing patterns in spending behavior, delinquency risk, credit utilization, and customer profitability.",
         link: "https://app.powerbi.com/view?r=eyJrIjoiOTVhYjMxYTAtYTE3My00NDkyLWIyYjYtMDY3Mjg4ZDdkZWRlIiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&embedImagePlaceholder=true",
       },
     ],
@@ -203,7 +224,7 @@ const services = [
 ];
 
 export default function ServicesPage() {
-  const [Url, setVideoUrl] = useState(null);
+  const [videoUrl, setVideoUrl] = useState(null);
 
   return (
     <>
