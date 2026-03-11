@@ -29,7 +29,7 @@ export default function Footer() {
               Smart services. Balanced lives. Building intelligent solutions that drive business optimization.
             </p>
             <a
-              href="https://www.linkedin.com/company/109349964/"
+              href="https://www.linkedin.com/company/pyrunai-services/"
               target="_blank"
               rel="noreferrer"
               data-testid="footer-linkedin"
