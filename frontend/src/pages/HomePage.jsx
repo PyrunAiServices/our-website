@@ -7,6 +7,182 @@ import {
   Play, ExternalLink, TrendingUp, Users, Globe
 } from "lucide-react";
 
+/* ─────────────────────────────────────────────
+   AGENTIC TEASER CARD — inline (no separate file)
+───────────────────────────────────────────── */
+const TEASER_STYLES = `
+  @keyframes atBlink   { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  @keyframes atGlow    { 0%,100%{opacity:0.35} 50%{opacity:0.65} }
+  @keyframes atScan    { 0%{top:-80px} 100%{top:110%} }
+  @keyframes atShimmer { 0%{left:-100%} 60%,100%{left:150%} }
+  @keyframes atBanner  { 0%{left:-100%} 60%,100%{left:100%} }
+  @keyframes atFill    { to{width:72%} }
+
+  @keyframes atFadeIn {
+    0%   { opacity:0; transform: scale(0.96); }
+    100% { opacity:1; transform: scale(1); }
+  }
+  .at-reveal {
+    animation: atFadeIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  @media(max-width:640px){
+    .at-tagline{display:none!important}
+    .at-inner{padding:13px!important}
+    .at-hl{font-size:16px!important}
+  }
+`;
+
+function ATScanlines() {
+  return <div style={{ position:"absolute",inset:0,pointerEvents:"none",zIndex:1,background:"repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,128,0.012) 2px,rgba(0,255,128,0.012) 3px)" }} />;
+}
+function ATScanBand() {
+  return <div style={{ position:"absolute",left:0,right:0,height:80,background:"linear-gradient(180deg,transparent,rgba(0,255,128,0.04),transparent)",animation:"atScan 5s linear infinite",pointerEvents:"none",zIndex:1 }} />;
+}
+function ATGlitchLines() {
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const id = setInterval(() => { setOn(true); setTimeout(()=>setOn(false),160); }, 5000);
+    return () => clearInterval(id);
+  }, []);
+  if (!on) return null;
+  return (
+    <>
+      {[{top:"40%",left:"8%",width:"50%"},{top:"67%",left:"12%",width:"58%"}].map((s,i)=>(
+        <div key={i} style={{ position:"absolute",height:1,background:"rgba(0,255,128,0.22)",pointerEvents:"none",zIndex:2,...s }} />
+      ))}
+    </>
+  );
+}
+function ATRedactLine({ width="90%", dim=false }) {
+  return (
+    <div style={{ height:7,borderRadius:2,margin:"4px 0",background:dim?"rgba(255,255,255,0.05)":"rgba(255,255,255,0.09)",width,position:"relative",overflow:"hidden" }}>
+      <div style={{ position:"absolute",top:0,left:0,width:"60%",height:"100%",background:"linear-gradient(90deg,transparent,rgba(0,255,128,0.07),transparent)",animation:"atShimmer 3.5s ease-in-out infinite" }} />
+    </div>
+  );
+}
+const AT_MILESTONES = [
+  { label:"R&D",   state:"done" },
+  { label:"BUILD", state:"done" },
+  { label:"BETA",  state:"now"  },
+  { label:"LAUNCH",state:"pending" },
+];
+function AgenticTeaserCard() {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <>
+      <style>{TEASER_STYLES}</style>
+      <div
+        style={{ position:"relative", width:"100%", maxWidth:380, fontFamily:"'IBM Plex Mono',monospace", userSelect:"none", transform:"scale(0.92)", transformOrigin:"top center" }}
+        onMouseEnter={()=>setHovered(true)}
+        onMouseLeave={()=>setHovered(false)}
+      >
+        {/* Outer glow */}
+        <div style={{
+          position:"absolute", inset:-3, borderRadius:20,
+          background:"linear-gradient(135deg,rgba(0,255,128,0.2),rgba(0,180,255,0.08),transparent 70%)",
+          filter:"blur(9px)",
+          opacity: hovered ? 0.75 : 0.35,
+          transition:"opacity 0.4s", zIndex:0,
+          animation:"atGlow 3.5s ease-in-out infinite",
+        }} />
+
+        {/* Card shell — frosted glass so hero bleeds through */}
+        <div
+          className="at-reveal"
+          style={{
+            position:"relative", zIndex:1, borderRadius:16, overflow:"hidden",
+            background: hovered
+              ? "linear-gradient(160deg,rgba(8,16,10,0.82),rgba(3,10,5,0.88))"
+              : "linear-gradient(160deg,rgba(8,16,10,0.70),rgba(3,10,5,0.76))",
+            backdropFilter:"blur(14px)",
+            WebkitBackdropFilter:"blur(14px)",
+            border:`1px solid ${hovered?"rgba(0,255,128,0.45)":"rgba(0,255,128,0.25)"}`,
+            boxShadow: hovered
+              ? "0 8px 50px rgba(0,255,128,0.1),inset 0 0 40px rgba(0,0,0,0.15)"
+              : "0 4px 30px rgba(0,0,0,0.35),inset 0 0 30px rgba(0,0,0,0.1)",
+            transition:"background 0.4s,border-color 0.4s,box-shadow 0.4s",
+          }}
+        >
+          <ATScanlines />
+          <ATScanBand />
+          <ATGlitchLines />
+
+          {/* Banner */}
+          <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:9, background:"linear-gradient(90deg,rgba(0,255,128,0.05),rgba(0,255,128,0.11),rgba(0,255,128,0.05))", borderBottom:"1px solid rgba(0,255,128,0.14)", padding:"9px 14px",position:"relative",overflow:"hidden" }}>
+            <div style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",background:"linear-gradient(90deg,transparent,rgba(0,255,128,0.07),transparent)",animation:"atBanner 2.8s ease-in-out infinite",pointerEvents:"none" }} />
+            <div style={{ width:4,height:4,borderRadius:"50%",background:"rgba(0,255,128,0.55)" }} />
+            <span style={{ fontSize:10,fontWeight:700,color:"#00ff80",letterSpacing:"0.22em" }}>✦ COMING SOON ✦</span>
+            <div style={{ width:4,height:4,borderRadius:"50%",background:"rgba(0,255,128,0.55)" }} />
+          </div>
+
+          {/* Inner */}
+          <div className="at-inner" style={{ position:"relative",zIndex:3,padding:"18px 18px 16px" }}>
+            {/* Top bar */}
+            <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:13 }}>
+              <div style={{ display:"flex",alignItems:"center",gap:7 }}>
+                <div style={{ width:7,height:7,borderRadius:"50%",background:"#00ff80",boxShadow:"0 0 7px #00ff80",animation:"atBlink 1.4s infinite" }} />
+                <span style={{ color:"rgba(0,255,128,0.7)",fontSize:8.5,letterSpacing:"0.15em" }}>IN ACTIVE DEVELOPMENT</span>
+              </div>
+              <span style={{ fontSize:8.5,letterSpacing:"0.09em",background:"rgba(255,190,40,0.12)",border:"1px solid rgba(255,190,40,0.3)",color:"rgba(255,190,40,0.9)",padding:"3px 9px",borderRadius:100 }}>⚡ EARLY ACCESS</span>
+            </div>
+            {/* Headline */}
+            <p style={{ color:"rgba(0,255,128,0.45)",fontSize:8.5,letterSpacing:"0.2em",marginBottom:5 }}>NEXT-GEN PLATFORM — PYRUNAI</p>
+            <h2 className="at-hl" style={{ fontFamily:"'Syne',sans-serif",color:"#fff",fontSize:19,fontWeight:800,lineHeight:1.25,textShadow:hovered?"0 0 22px rgba(0,255,128,0.35)":"none",transition:"text-shadow 0.3s" }}>
+              The Era of <span style={{ color:"#00ff80" }}>Agentic AI</span><br />Is Here.
+            </h2>
+            <p className="at-tagline" style={{ color:"rgba(255,255,255,0.35)",fontSize:9.5,lineHeight:1.55,marginTop:7 }}>
+              A groundbreaking autonomous intelligence<br />platform — currently in final build. Be first.
+            </p>
+            {/* Divider */}
+            <div style={{ height:1,background:"linear-gradient(90deg,rgba(0,255,128,0.22),transparent)",margin:"12px 0" }} />
+            {/* Redacted */}
+            <p style={{ color:"rgba(255,255,255,0.2)",fontSize:8.5,letterSpacing:"0.15em",marginBottom:6 }}>FEATURE SET — DETAILS RESTRICTED</p>
+            <ATRedactLine width="90%" />
+            <ATRedactLine width="73%" />
+            <ATRedactLine width="81%" dim />
+            <div style={{ height:11 }} />
+            {/* Progress */}
+            <p style={{ color:"rgba(255,255,255,0.2)",fontSize:8.5,letterSpacing:"0.15em",marginBottom:7 }}>DEVELOPMENT PROGRESS</p>
+            <div style={{ height:3,background:"rgba(255,255,255,0.07)",borderRadius:100,overflow:"hidden" }}>
+              <div style={{ height:"100%",width:0,borderRadius:100,background:"linear-gradient(90deg,#00ff80,#00e5ff)",boxShadow:"0 0 8px rgba(0,255,128,0.5)",animation:"atFill 2.5s ease-out forwards 0.8s" }} />
+            </div>
+            <div style={{ display:"flex",justifyContent:"space-between",marginTop:7 }}>
+              {AT_MILESTONES.map(({label,state})=>(
+                <div key={label} style={{ display:"flex",flexDirection:"column",alignItems:"center",gap:3 }}>
+                  <div style={{ width:5,height:5,borderRadius:"50%",background:state==="done"?"#00ff80":state==="now"?"rgba(0,255,128,0.45)":"rgba(255,255,255,0.1)",boxShadow:state==="done"?"0 0 5px rgba(0,255,128,0.5)":"none",animation:state==="now"?"atBlink 1.2s infinite":"none" }} />
+                  <span style={{ fontSize:7,letterSpacing:"0.06em",color:state==="done"?"rgba(0,255,128,0.6)":state==="now"?"rgba(0,255,128,0.95)":"rgba(255,255,255,0.25)" }}>{label}</span>
+                </div>
+              ))}
+            </div>
+            {/* CTA */}
+            <Link to="/contact" style={{ display:"flex",alignItems:"center",gap:12,background:hovered?"linear-gradient(135deg,rgba(0,255,128,0.14),rgba(0,200,255,0.08))":"linear-gradient(135deg,rgba(0,255,128,0.08),rgba(0,200,255,0.04))",border:`1px solid ${hovered?"rgba(0,255,128,0.55)":"rgba(0,255,128,0.25)"}`,borderRadius:11,padding:"12px 13px",textDecoration:"none",marginTop:12,transition:"all 0.3s" }}>
+              <div style={{ width:36,height:36,borderRadius:9,flexShrink:0,background:"rgba(0,255,128,0.1)",border:"1px solid rgba(0,255,128,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,transform:hovered?"scale(1.1) rotate(-5deg)":"none",transition:"transform 0.3s" }}>🤝</div>
+              <div style={{ flex:1 }}>
+                <div style={{ fontFamily:"'Syne',sans-serif",color:"#fff",fontSize:12,fontWeight:700 }}>Investor &amp; Partner Enquiries</div>
+                <div style={{ color:"rgba(0,255,128,0.6)",fontSize:8.5,letterSpacing:"0.1em",marginTop:2 }}>GET EARLY ACCESS → SCHEDULE A CALL</div>
+              </div>
+              <div style={{ fontSize:16,color:"rgba(0,255,128,0.7)",transform:hovered?"translateX(4px)":"none",transition:"transform 0.3s" }}>→</div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Corner brackets */}
+        {[
+          { top:-3,left:-3,  borderTop:"2px solid rgba(0,255,128,0.45)",borderLeft:"2px solid rgba(0,255,128,0.45)"   },
+          { top:-3,right:-3, borderTop:"2px solid rgba(0,255,128,0.45)",borderRight:"2px solid rgba(0,255,128,0.45)"  },
+          { bottom:-3,left:-3,  borderBottom:"2px solid rgba(0,255,128,0.45)",borderLeft:"2px solid rgba(0,255,128,0.45)"  },
+          { bottom:-3,right:-3, borderBottom:"2px solid rgba(0,255,128,0.45)",borderRight:"2px solid rgba(0,255,128,0.45)" },
+        ].map((s,i)=>(
+          <div key={i} style={{ position:"absolute",width:13,height:13,zIndex:4,...s }} />
+        ))}
+      </div>
+    </>
+  );
+}
+/* ─── end AgenticTeaserCard ─── */
+
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
@@ -242,7 +418,8 @@ export default function HomePage() {
 
         {/* Slide content */}
         <div className="relative z-[5] max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-20 md:py-28 w-full">
-          <div className="max-w-2xl">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12 lg:min-h-0">
+          <div className="max-w-2xl lg:flex-1">
             <motion.div
               key={`tag-${textKey}`}
               initial={{ opacity: 0, y: -10 }}
@@ -306,7 +483,46 @@ export default function HomePage() {
             >
               Trusted by leading enterprises for data-driven transformation
             </motion.p>
+
+            {/* Mobile-only compact teaser strip */}
+            <motion.div
+              key={`mob-teaser-${textKey}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.75 }}
+              className="lg:hidden mt-8"
+            >
+              <Link to="/contact" style={{
+                display:"flex", alignItems:"center", gap:12,
+                background:"linear-gradient(135deg,rgba(8,16,10,0.75),rgba(3,10,5,0.80))",
+                backdropFilter:"blur(12px)", WebkitBackdropFilter:"blur(12px)",
+                border:"1px solid rgba(0,255,128,0.28)",
+                borderRadius:14, padding:"12px 16px",
+                textDecoration:"none", fontFamily:"'IBM Plex Mono',monospace",
+              }}>
+                <div style={{ width:8,height:8,borderRadius:"50%",background:"#00ff80",boxShadow:"0 0 8px #00ff80",flexShrink:0,animation:"atBlink 1.4s infinite" }} />
+                <div style={{ flex:1 }}>
+                  <div style={{ color:"#00ff80",fontSize:9,fontWeight:700,letterSpacing:"0.18em" }}>✦ COMING SOON — AGENTIC AI PLATFORM</div>
+                  <div style={{ color:"rgba(255,255,255,0.5)",fontSize:9,marginTop:2,letterSpacing:"0.06em" }}>Investor &amp; Partner Enquiries → Schedule a Call</div>
+                </div>
+                <div style={{ color:"rgba(0,255,128,0.7)",fontSize:14 }}>→</div>
+              </Link>
+            </motion.div>
           </div>
+
+          {/* ── Teaser Card — desktop right column only ── */}
+          <motion.div
+            key={`teaser-${textKey}`}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:flex lg:flex-shrink-0 lg:w-[380px] items-center justify-center"
+            style={{ maxHeight: "520px", overflow: "visible" }}
+          >
+            <AgenticTeaserCard />
+          </motion.div>
+
+          </div>{/* end flex row */}
         </div>
       </section>
 
