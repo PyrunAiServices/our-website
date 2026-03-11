@@ -69,9 +69,24 @@ const services = [
       { icon: GitBranch, text: "MLOps & Model Management" },
     ],
     projects: [
-      { title: "AI-Powered Traffic & Conversion Prediction Tool", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80", desc: "An AI-enabled system that analyzes traffic metrics, applies regression models, and forecasts user conversion behavior to support smarter digital decision-making.", link: "https://websitetrafficprediction-gniaputvpj5nrgwpp23xio.streamlit.app/",},
-      { title: "Advanced Deepfake Image Identification Tool", img: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=600&q=80", desc: "Automated document extraction and classification for enterprise workflows.", link: null,},
-      { title: "Smart Language Translation Tool", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80", desc: "ML-based predictive system reducing equipment downtime.", link: null,},
+      {
+        title: "AI-Powered Traffic & Conversion Prediction Tool",
+        img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80",
+        desc: "An AI-enabled system that analyzes traffic metrics, applies regression models, and forecasts user conversion behavior to support smarter digital decision-making.",
+        link: "https://websitetrafficprediction-gniaputvpj5nrgwpp23xio.streamlit.app/",
+      },
+      {
+        title: "Advanced Deepfake Image Identification Tool",
+        img: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=600&q=80",
+        desc: "Automated document extraction and classification for enterprise workflows.",
+        link: null,
+      },
+      {
+        title: "Smart Language Translation Tool",
+        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+        desc: "ML-based predictive system reducing equipment downtime.",
+        link: null,
+      },
     ],
   },
   {
@@ -91,9 +106,24 @@ const services = [
       { icon: Layers, text: "Data Warehouse Architecture" },
     ],
     projects: [
-      { title: "Data Science Job Salaries – Insights & Analytics Dashboard", img: "https://pyrunai.com/images/dataan1.jpeg", desc: "Using advanced coding and visualization techniques, this project analyzes 37,000+ salary records to highlight salary differences by role, experience level, company size, and employment type.", link: "https://datasciencejobsalariesanalysis-fyxptxm8gnktwajw6x2yvq.streamlit.app/", },
-      { title: "Python-Based Stock Performance Analysis of Major Banks", img: "https://pyrunai.com/images/dataaan2.jpeg", desc: "An end-to-end financial analytics project analyzing top bank stocks and presenting key KPIs: average price growth, sharpest market drop, yearly performance metrics, and return-on-investment benchmarks. Time-series visualizations reveal actionable investment insights.", link: "https://pyrunai.com/images/Stock_analysis_hw.pdf", },
-      { title: "Supply Chain Delay & Optimization Analytics", img: "https://pyrunai.com/images/daaa3.jpeg", desc: "An intelligence system designed to improve supply chain efficiency by analyzing delivery timelines, route dependencies, and vendor reliability. Key KPIs like average delay time, on-time delivery rate, vendor success ratio, and logistics bottleneck frequency are evaluated to uncover hidden inefficiencies and optimize planning, procurement, and scheduling.", link: null, },
+      {
+        title: "Data Science Job Salaries – Insights & Analytics Dashboard",
+        img: "/images/Data Science Job Salaries – Insights & Analytics Dashboard.png",
+        desc: "Using advanced coding and visualization techniques, this project analyzes 37,000+ salary records to highlight salary differences by role, experience level, company size, and employment type.",
+        link: "https://datasciencejobsalariesanalysis-fyxptxm8gnktwajw6x2yvq.streamlit.app/",
+      },
+      {
+        title: "Python-Based Stock Performance Analysis of Major Banks",
+        img: "/images/Python-Based Stock Performance Analysis of Major Banks.png",
+        desc: "An end-to-end financial analytics project analyzing top bank stocks and presenting key KPIs: average price growth, sharpest market drop, yearly performance metrics, and return-on-investment benchmarks. Time-series visualizations reveal actionable investment insights.",
+        link: null,
+      },
+      {
+        title: "Supply Chain Delay & Optimization Analytics",
+        img: "/images/Supply Chain Delay & Optimization Analytics.png",
+        desc: "An intelligence system designed to improve supply chain efficiency by analyzing delivery timelines, route dependencies, and vendor reliability. Key KPIs like average delay time, on-time delivery rate, vendor success ratio, and logistics bottleneck frequency are evaluated to uncover hidden inefficiencies and optimize planning, procurement, and scheduling.",
+        link: null,
+      },
     ],
   },
   {
@@ -113,9 +143,24 @@ const services = [
       { icon: Globe, text: "Cloud-Native Architecture" },
     ],
     projects: [
-      { title: "Dynamic Business Website Powered by React Frontend & Node Backend", img: "https://pyrunai.com/images/web1.png", desc: "This website is a modern, fully responsive company platform built using React for the frontend and Node.js for the backend. It showcases our IT and data analytics services with a clean UI, fast performance, and smooth navigation.", link: "https://www.pyrunai.com",},
-      { title: "E-commerce Mobile App", img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80", desc: "Cross-platform mobile app with AI-powered product recommendations.", link: null, },
-      { title: "ADA Compliance Platform", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80", desc: "Website accessibility compliance tool ensuring WCAG standards.", link: "https://www.pyrunai.com",},
+      {
+        title: "Dynamic Business Website Powered by React Frontend & Node Backend",
+        img: "/images/Dynamic Business Website Powered by React Frontend & Node Backend.png",
+        desc: "This website is a modern, fully responsive company platform built using React for the frontend and Node.js for the backend. It showcases our IT and data analytics services with a clean UI, fast performance, and smooth navigation.",
+        link: "https://www.pyrunai.com",
+      },
+      {
+        title: "E-commerce Mobile App",
+        img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80",
+        desc: "Cross-platform mobile app with AI-powered product recommendations.",
+        link: null,
+      },
+      {
+        title: "ADA Compliance Platform",
+        img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80",
+        desc: "Website accessibility compliance tool ensuring WCAG standards.",
+        link: "https://testpros.com/articles/ada-website-compliance/",
+      },
     ],
   },
   {
@@ -135,9 +180,24 @@ const services = [
       { icon: Workflow, text: "Automated Refresh & Distribution" },
     ],
     projects: [
-      { title: "Applicant Tracking System Performance Dashboard", img: "https://pyrunai.com/images/powerbi1.png", desc: "A powerful recruitment analytics dashboard that provides complete visibility into the hiring process. It tracks application volume, candidate quality, recruiter output, and overall hiring efficiency, helping organizations reduce hiring delays, improve talent acquisition performance, and refine sourcing strategies.", link:"https://app.powerbi.com/view?r=eyJrIjoiMDYwZTQyMTEtMWIzMS00NDY2LWFjMGMtZTFjNmVmZDc1YzI2IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9", },
-      { title: "USA Real-Estate Market Analytics Dashboard", img: "https://pyrunai.com/images/powerbi2.jpeg", desc: "A visually rich dashboard designed to support real-estate investment decisions. It highlights pricing trends, market hotspots, inventory distribution, and investment-worthy regions across the USA, empowering businesses with accurate and actionable market intelligence.", link:"https://app.powerbi.com/view?r=eyJrIjoiOGE1MTIxMzYtZTQ1Ni00MjkwLWIwOWItYTBiNjYyY2IwMGM4IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&pageName=9da571941c89c6b47031",},
-      { title: "Customer Segmentation & Spend Analysis (Credit Cards)", img: "https://pyrunai.com/images/powerbi3.jpeg", desc: "A powerful analytics dashboard that uncovers how customers use their credit cards, revealing patterns in spending behavior, delinquency risk, credit utilization, and customer profitability. Key insights include: 42% of customers showing high utilization, 18% falling into potential delinquency, and top 12% contributing nearly 60% of total revenue. This report helps businesses identify high-value customers, optimize credit strategies, and reduce default risk with actionable, data-backed insights.", link:"https://app.powerbi.com/view?r=eyJrIjoiOTVhYjMxYTAtYTE3My00NDkyLWIyYjYtMDY3Mjg4ZDdkZWRlIiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&embedImagePlaceholder=true", },
+      {
+        title: "Applicant Tracking System Performance Dashboard",
+        img: "/images/Submission Report.png",
+        desc: "A powerful recruitment analytics dashboard that provides complete visibility into the hiring process. It tracks application volume, candidate quality, recruiter output, and overall hiring efficiency, helping organizations reduce hiring delays, improve talent acquisition performance, and refine sourcing strategies.",
+        link: "https://app.powerbi.com/view?r=eyJrIjoiMDYwZTQyMTEtMWIzMS00NDY2LWFjMGMtZTFjNmVmZDc1YzI2IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9",
+      },
+      {
+        title: "USA Real-Estate Market Analytics Dashboard",
+        img: "/images/USA RealEstate.png",
+        desc: "A visually rich dashboard designed to support real-estate investment decisions. It highlights pricing trends, market hotspots, inventory distribution, and investment-worthy regions across the USA, empowering businesses with accurate and actionable market intelligence.",
+        link: "https://app.powerbi.com/view?r=eyJrIjoiOGE1MTIxMzYtZTQ1Ni00MjkwLWIwOWItYTBiNjYyY2IwMGM4IiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&pageName=9da571941c89c6b47031",
+      },
+      {
+        title: "Customer Segmentation & Spend Analysis (Credit Cards)",
+        img: "/images/CreditCard.png",
+        desc: "A powerful analytics dashboard that uncovers how customers use their credit cards, revealing patterns in spending behavior, delinquency risk, credit utilization, and customer profitability. Key insights include: 42% of customers showing high utilization, 18% falling into potential delinquency, and top 12% contributing nearly 60% of total revenue.",
+        link: "https://app.powerbi.com/view?r=eyJrIjoiOTVhYjMxYTAtYTE3My00NDkyLWIyYjYtMDY3Mjg4ZDdkZWRlIiwidCI6ImMyMTRjYThkLTA0NWUtNGFlNy1hM2M2LWQ0YzUwMDQ2NzkxMyJ9&embedImagePlaceholder=true",
+      },
     ],
   },
 ];
@@ -177,7 +237,7 @@ export default function ServicesPage() {
         <section key={svc.id} id={svc.id} data-testid={`service-detail-${svc.id}`} className={`py-20 md:py-28 ${i % 2 === 0 ? "bg-white" : "bg-surface"}`}>
           <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
             {/* Service Header + Features */}
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16`}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
               <motion.div {...fadeUp} className={i % 2 !== 0 ? "lg:order-2" : ""}>
                 <div className={`inline-flex items-center justify-center h-14 w-14 rounded-2xl ${svc.color} mb-6`}>
                   <svc.icon size={28} />
@@ -227,35 +287,37 @@ export default function ServicesPage() {
                         <img src={proj.img} alt={proj.title} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                         {proj.metric && (
-                     <span className="absolute top-3 right-3 bg-navy-800 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {proj.metric}
-                    </span>
-                           )}
+                          <span className="absolute top-3 right-3 bg-navy-800 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            {proj.metric}
+                          </span>
+                        )}
                       </div>
                       <div className="p-5 flex flex-col flex-1">
-                       <h4 className="font-heading font-semibold text-text-main mb-2">
-  {proj.link ? (
-    <a
-      href={proj.link}
-      target="_blank"
-      rel="noreferrer"
-      className="underline hover:text-green-600 transition-colors"
-    >
-      {proj.title}
-    </a>
-  ) : (
-    proj.title
-  )}
-</h4>
+                        <h4 className="font-heading font-semibold text-text-main mb-2">
+                          {proj.link ? (
+                            <a
+                              href={proj.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="underline hover:text-green-600 transition-colors"
+                            >
+                              {proj.title}
+                            </a>
+                          ) : (
+                            proj.title
+                          )}
+                        </h4>
                         <p className="text-sm text-slate-500 leading-relaxed flex-1 mb-3">{proj.desc}</p>
-                        {proj.link ? (
-                          <a href={proj.link} target="_blank" rel="noreferrer" data-testid={`project-link-${svc.id}-${pi}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800 hover:text-green-600 transition-colors animated-underline">
+                        {proj.link && (
+                          <a
+                            href={proj.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            data-testid={`project-link-${svc.id}-${pi}`}
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800 hover:text-green-600 transition-colors animated-underline"
+                          >
                             View Live <ExternalLink size={13} />
                           </a>
-                        ) : (
-                          <Link to="/case-studies" className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800 hover:text-green-600 transition-colors animated-underline">
-                            Read Case Study <ArrowRight size={13} />
-                          </Link>
                         )}
                       </div>
                     </div>
