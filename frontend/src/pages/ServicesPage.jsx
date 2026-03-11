@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Brain, BarChart3, Code2, PieChart, ArrowRight, Play, ExternalLink,
+  Brain, BarChart3, Code2, PieChart, ArrowRight, ExternalLink,
   Cpu, Database, LineChart, Globe, Layers, GitBranch,
-  Monitor, Smartphone, Server, Workflow, FileBarChart, Users, X
+  Monitor, Smartphone, Server, Workflow, FileBarChart, Users
 } from "lucide-react";
 
 const fadeUp = {
@@ -20,56 +19,6 @@ const stagger = {
   viewport: { once: true },
 };
 
-// Detects if a URL is a local video file or a remote embed (YouTube, etc.)
-function isLocalVideo(url) {
-  return url && (url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".ogg"));
-}
-
-function VideoModal({ url, onClose }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          data-testid="video-modal-close"
-          className="absolute top-3 right-3 z-10 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
-        >
-          <X size={20} />
-        </button>
-
-        {isLocalVideo(url) ? (
-          <video
-            src={url}
-            className="w-full h-full"
-            controls
-            autoPlay
-          />
-        ) : (
-          <iframe
-            src={url}
-            title="Service video"
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        )}
-      </motion.div>
-    </motion.div>
-  );
-}
-
 const INTRO_VIDEO = "/images/PyrunAi intro.mp4";
 
 const services = [
@@ -81,8 +30,6 @@ const services = [
     desc: "We build custom AI models, NLP systems, computer vision pipelines, and intelligent automation solutions that transform how your business operates. From predictive analytics to conversational AI, our solutions drive measurable outcomes.",
     color: "bg-blue-50 text-blue-600",
     borderColor: "hover:border-blue-200",
-    heroImg: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
-    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Cpu, text: "Custom ML Model Development" },
       { icon: Workflow, text: "NLP & Text Analytics" },
@@ -118,8 +65,6 @@ const services = [
     desc: "Transform your raw data into strategic assets with our end-to-end analytics solutions. We design robust ETL pipelines, build interactive dashboards, and create insight engines that empower every level of your organization.",
     color: "bg-emerald-50 text-emerald-600",
     borderColor: "hover:border-emerald-200",
-    heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Database, text: "ETL Pipeline Design" },
       { icon: LineChart, text: "Real-time Dashboards" },
@@ -155,8 +100,6 @@ const services = [
     desc: "We create high-performing web applications, mobile apps, and APIs using modern frameworks and best practices. Our development approach prioritizes speed, scalability, and user experience for your business applications.",
     color: "bg-amber-50 text-amber-600",
     borderColor: "hover:border-amber-200",
-    heroImg: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80",
-    videoUrl: INTRO_VIDEO,
     features: [
       { icon: Monitor, text: "Modern Web Applications" },
       { icon: Smartphone, text: "Mobile App Development" },
@@ -192,8 +135,6 @@ const services = [
     desc: "Unlock the full potential of your data with our Power BI expertise. We build interactive dashboards, complex data models, and automated reports that give executives and operators real-time visibility into business performance.",
     color: "bg-violet-50 text-violet-600",
     borderColor: "hover:border-violet-200",
-    heroImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-    videoUrl: INTRO_VIDEO,
     features: [
       { icon: FileBarChart, text: "Interactive Dashboards" },
       { icon: Database, text: "Data Modeling & DAX" },
@@ -224,12 +165,8 @@ const services = [
 ];
 
 export default function ServicesPage() {
-  const [videoUrl, setVideoUrl] = useState(null);
-
   return (
     <>
-      {videoUrl && <VideoModal url={videoUrl} onClose={() => setVideoUrl(null)} />}
-
       {/* Hero */}
       <section data-testid="services-hero" className="relative py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80)" }} />
@@ -279,18 +216,17 @@ export default function ServicesPage() {
                 </Link>
               </motion.div>
 
-              {/* Video / Image */}
+              {/* Autoplay Intro Video */}
               <motion.div {...fadeUp} className={i % 2 !== 0 ? "lg:order-1" : ""}>
-                <div className="relative img-reveal rounded-2xl overflow-hidden group cursor-pointer" onClick={() => setVideoUrl(svc.videoUrl)}>
-                  <img src={svc.heroImg} alt={svc.title} className="w-full aspect-video object-cover" />
-                  <div className="absolute inset-0 bg-navy-900/30 group-hover:bg-navy-900/50 transition-colors flex items-center justify-center">
-                    <div data-testid={`play-video-${svc.id}`} className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform play-btn-pulse">
-                      <Play size={28} className="text-navy-800 ml-1" fill="#1A365B" />
-                    </div>
-                  </div>
-                  <span className="absolute bottom-4 left-4 bg-black/40 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full">
-                    Watch Introduction
-                  </span>
+                <div className="rounded-2xl overflow-hidden shadow-xl">
+                  <video
+                    src={INTRO_VIDEO}
+                    className="w-full aspect-video object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
                 </div>
               </motion.div>
             </div>
