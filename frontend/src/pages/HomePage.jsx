@@ -484,7 +484,7 @@ export default function HomePage() {
               Trusted by leading enterprises for data-driven transformation
             </motion.p>
 
-            {/* Mobile-only compact teaser strip */}
+            {/* Mobile teaser card — full design, compact size */}
             <motion.div
               key={`mob-teaser-${textKey}`}
               initial={{ opacity: 0, y: 16 }}
@@ -492,20 +492,81 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.75 }}
               className="lg:hidden mt-8"
             >
-              <Link to="/contact" style={{
-                display:"flex", alignItems:"center", gap:12,
-                background:"linear-gradient(135deg,rgba(8,16,10,0.75),rgba(3,10,5,0.80))",
-                backdropFilter:"blur(12px)", WebkitBackdropFilter:"blur(12px)",
-                border:"1px solid rgba(0,255,128,0.28)",
-                borderRadius:14, padding:"12px 16px",
-                textDecoration:"none", fontFamily:"'IBM Plex Mono',monospace",
-              }}>
-                <div style={{ width:8,height:8,borderRadius:"50%",background:"#00ff80",boxShadow:"0 0 8px #00ff80",flexShrink:0,animation:"atBlink 1.4s infinite" }} />
-                <div style={{ flex:1 }}>
-                  <div style={{ color:"#00ff80",fontSize:9,fontWeight:700,letterSpacing:"0.18em" }}>✦ COMING SOON — AGENTIC AI PLATFORM</div>
-                  <div style={{ color:"rgba(255,255,255,0.5)",fontSize:9,marginTop:2,letterSpacing:"0.06em" }}>Investor &amp; Partner Enquiries → Schedule a Call</div>
+              <Link to="/contact" style={{ textDecoration:"none" }}>
+                <div style={{
+                  fontFamily:"'IBM Plex Mono',monospace",
+                  background:"linear-gradient(160deg,rgba(8,16,10,0.82),rgba(3,10,5,0.88))",
+                  backdropFilter:"blur(14px)", WebkitBackdropFilter:"blur(14px)",
+                  border:"1px solid rgba(0,255,128,0.3)",
+                  borderRadius:14, overflow:"hidden",
+                  boxShadow:"0 4px 24px rgba(0,0,0,0.4)",
+                  position:"relative",
+                }}>
+                  {/* Scanline overlay */}
+                  <div style={{ position:"absolute",inset:0,pointerEvents:"none",background:"repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,128,0.008) 2px,rgba(0,255,128,0.008) 3px)",zIndex:0 }} />
+
+                  {/* Banner */}
+                  <div style={{ display:"flex",alignItems:"center",justifyContent:"center",gap:8,background:"linear-gradient(90deg,rgba(0,255,128,0.05),rgba(0,255,128,0.12),rgba(0,255,128,0.05))",borderBottom:"1px solid rgba(0,255,128,0.15)",padding:"7px 14px",position:"relative",zIndex:1 }}>
+                    <div style={{ width:3,height:3,borderRadius:"50%",background:"rgba(0,255,128,0.6)" }} />
+                    <span style={{ fontSize:9,fontWeight:700,color:"#00ff80",letterSpacing:"0.2em" }}>✦ COMING SOON ✦</span>
+                    <div style={{ width:3,height:3,borderRadius:"50%",background:"rgba(0,255,128,0.6)" }} />
+                  </div>
+
+                  {/* Body */}
+                  <div style={{ padding:"14px 16px",position:"relative",zIndex:1 }}>
+                    {/* Top row */}
+                    <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10 }}>
+                      <div style={{ display:"flex",alignItems:"center",gap:6 }}>
+                        <div style={{ width:6,height:6,borderRadius:"50%",background:"#00ff80",boxShadow:"0 0 6px #00ff80",animation:"atBlink 1.4s infinite",flexShrink:0 }} />
+                        <span style={{ color:"rgba(0,255,128,0.75)",fontSize:8,letterSpacing:"0.14em" }}>IN ACTIVE DEVELOPMENT</span>
+                      </div>
+                      <span style={{ fontSize:7.5,background:"rgba(255,190,40,0.12)",border:"1px solid rgba(255,190,40,0.3)",color:"rgba(255,190,40,0.9)",padding:"2px 8px",borderRadius:100,letterSpacing:"0.08em" }}>⚡ EARLY ACCESS</span>
+                    </div>
+
+                    {/* Headline */}
+                    <p style={{ color:"rgba(0,255,128,0.5)",fontSize:7.5,letterSpacing:"0.18em",marginBottom:4 }}>NEXT-GEN PLATFORM — PYRUNAI</p>
+                    <h3 style={{ fontFamily:"'Syne',sans-serif",color:"#fff",fontSize:17,fontWeight:800,lineHeight:1.25,margin:"0 0 6px" }}>
+                      The Era of <span style={{ color:"#00ff80" }}>Agentic AI</span> Is Here.
+                    </h3>
+                    <p style={{ color:"rgba(255,255,255,0.4)",fontSize:9,lineHeight:1.5,marginBottom:10 }}>
+                      A groundbreaking autonomous intelligence platform — currently in final build. Be first.
+                    </p>
+
+                    {/* Redacted bars */}
+                    <p style={{ color:"rgba(255,255,255,0.2)",fontSize:7.5,letterSpacing:"0.14em",marginBottom:5 }}>FEATURE SET — DETAILS RESTRICTED</p>
+                    {["88%","72%","80%"].map((w,i) => (
+                      <div key={i} style={{ height:6,borderRadius:2,margin:"3px 0",background:"rgba(255,255,255,0.08)",width:w,position:"relative",overflow:"hidden" }}>
+                        <div style={{ position:"absolute",top:0,left:0,width:"60%",height:"100%",background:"linear-gradient(90deg,transparent,rgba(0,255,128,0.07),transparent)",animation:"atShimmer 3.5s ease-in-out infinite" }} />
+                      </div>
+                    ))}
+
+                    {/* Progress */}
+                    <div style={{ marginTop:10 }}>
+                      <p style={{ color:"rgba(255,255,255,0.2)",fontSize:7.5,letterSpacing:"0.14em",marginBottom:6 }}>DEVELOPMENT PROGRESS</p>
+                      <div style={{ height:3,background:"rgba(255,255,255,0.07)",borderRadius:100,overflow:"hidden" }}>
+                        <div style={{ height:"100%",width:0,borderRadius:100,background:"linear-gradient(90deg,#00ff80,#00e5ff)",boxShadow:"0 0 8px rgba(0,255,128,0.5)",animation:"atFill 2.5s ease-out forwards 0.8s" }} />
+                      </div>
+                      <div style={{ display:"flex",justifyContent:"space-between",marginTop:6 }}>
+                        {[{l:"R&D",s:"done"},{l:"BUILD",s:"done"},{l:"BETA",s:"now"},{l:"LAUNCH",s:"pending"}].map(({l,s})=>(
+                          <div key={l} style={{ display:"flex",flexDirection:"column",alignItems:"center",gap:3 }}>
+                            <div style={{ width:5,height:5,borderRadius:"50%",background:s==="done"?"#00ff80":s==="now"?"rgba(0,255,128,0.5)":"rgba(255,255,255,0.1)",boxShadow:s==="done"?"0 0 5px rgba(0,255,128,0.5)":"none",animation:s==="now"?"atBlink 1.2s infinite":"none" }} />
+                            <span style={{ fontSize:6.5,letterSpacing:"0.06em",color:s==="done"?"rgba(0,255,128,0.65)":s==="now"?"rgba(0,255,128,1)":"rgba(255,255,255,0.25)" }}>{l}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* CTA row */}
+                    <div style={{ display:"flex",alignItems:"center",gap:10,background:"linear-gradient(135deg,rgba(0,255,128,0.08),rgba(0,200,255,0.04))",border:"1px solid rgba(0,255,128,0.25)",borderRadius:10,padding:"10px 12px",marginTop:12 }}>
+                      <div style={{ width:30,height:30,borderRadius:8,flexShrink:0,background:"rgba(0,255,128,0.1)",border:"1px solid rgba(0,255,128,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13 }}>🤝</div>
+                      <div style={{ flex:1 }}>
+                        <div style={{ fontFamily:"'Syne',sans-serif",color:"#fff",fontSize:11,fontWeight:700 }}>Investor &amp; Partner Enquiries</div>
+                        <div style={{ color:"rgba(0,255,128,0.6)",fontSize:7.5,letterSpacing:"0.1em",marginTop:1 }}>GET EARLY ACCESS → SCHEDULE A CALL</div>
+                      </div>
+                      <div style={{ fontSize:14,color:"rgba(0,255,128,0.7)" }}>→</div>
+                    </div>
+                  </div>
                 </div>
-                <div style={{ color:"rgba(0,255,128,0.7)",fontSize:14 }}>→</div>
               </Link>
             </motion.div>
           </div>
