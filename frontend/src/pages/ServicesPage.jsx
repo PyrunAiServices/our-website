@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Brain, BarChart3, Code2, PieChart, ArrowRight, Play, ExternalLink,
   Cpu, Database, LineChart, Globe, Layers, GitBranch,
-  Monitor, Smartphone, Server, Workflow, FileBarChart, Users, X
+  Monitor, Smartphone, Server, Workflow, FileBarChart, Users, X, Clock, TrendingUp
 } from "lucide-react";
 
 const fadeUp = {
@@ -114,8 +114,8 @@ const services = [
     ],
     projects: [
       { title: "Dynamic Business Website Powered by React Frontend & Node Backend", img: "https://pyrunai.com/images/web1.png", desc: "This website is a modern, fully responsive company platform built using React for the frontend and Node.js for the backend. It showcases our IT and data analytics services with a clean UI, fast performance, and smooth navigation.", link: "https://www.pyrunai.com",},
-      { title: "E-commerce Mobile App", img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80", desc: "Cross-platform mobile app with AI-powered product recommendations.", link: null, },
-      { title: "ADA Compliance Platform", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80", desc: "Website accessibility compliance tool ensuring WCAG standards.", link: "https://www.pyrunai.com",},
+      { title: "Colonial Client – Full Business Website", img: "/Colonial-Consultants-Favicon (1).png", desc: "A professional, fully responsive multi-page business website built for a colonial-style enterprise client. Delivered a clean brand identity, optimized landing pages, and seamless navigation tailored to their target audience.", link: null, testimonial: { quote: "PyrunAI delivered exactly what we envisioned — a sleek, professional website that truly represents our brand. The team was responsive, detail-oriented, and exceeded our expectations.", name: "Sanket More", role: "BIM Engineer" } },
+      { title: "NB Bites – Restaurant Web & App Platform", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80", desc: "A full-stack web and mobile app solution for NB Bites, a growing food brand. Features an online menu, order management system, and a branded mobile app — driving increased customer engagement and streamlined operations.", link: null, testimonial: { quote: "Our online orders doubled within the first month after PyrunAI launched our website and app. The experience they built for our customers is seamless and beautiful.", name: "NB Bites", role: "Food & Beverage Brand" } },
     ],
   },
   {
@@ -223,8 +223,8 @@ export default function ServicesPage() {
                 {svc.projects.map((proj, pi) => (
                   <motion.div key={proj.title} {...stagger} transition={{ duration: 0.4, delay: pi * 0.1 }}>
                     <div className="card-hover-tilt bg-white rounded-2xl border border-slate-100 overflow-hidden group h-full flex flex-col">
-                      <div className="img-reveal h-44 relative">
-                        <img src={proj.img} alt={proj.title} className="w-full h-full object-cover" />
+                      <div className="img-reveal h-44 relative bg-slate-100 flex items-center justify-center">
+                        <img src={proj.img} alt={proj.title} className="w-full h-full object-contain p-2" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                         {proj.metric && (
                      <span className="absolute top-3 right-3 bg-navy-800 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -248,6 +248,12 @@ export default function ServicesPage() {
   )}
 </h4>
                         <p className="text-sm text-slate-500 leading-relaxed flex-1 mb-3">{proj.desc}</p>
+                        {proj.testimonial && (
+                          <div className="mt-2 mb-3 border-l-2 border-green-400 pl-3">
+                            <p className="text-xs text-slate-500 italic leading-relaxed">"{proj.testimonial.quote}"</p>
+                            <p className="text-xs font-semibold text-text-main mt-1">{proj.testimonial.name} <span className="font-normal text-slate-400">— {proj.testimonial.role}</span></p>
+                          </div>
+                        )}
                         {proj.link ? (
                           <a href={proj.link} target="_blank" rel="noreferrer" data-testid={`project-link-${svc.id}-${pi}`} className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-800 hover:text-green-600 transition-colors animated-underline">
                             View Live <ExternalLink size={13} />
@@ -266,6 +272,66 @@ export default function ServicesPage() {
           </div>
         </section>
       ))}
+
+      {/* PyrunAI AutoML Promotion */}
+      <section className="py-20 md:py-28 bg-navy-800 relative overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-green-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div {...fadeUp}>
+              <span className="inline-flex px-4 py-1.5 bg-green-400/20 text-green-300 rounded-full text-xs font-semibold font-mono tracking-wide border border-green-400/30 mb-6 block w-fit">
+                🚀 Now Live
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">
+                Introducing <span className="text-green-400">PyrunAI AutoML</span> — Train Models Without Code
+              </h2>
+              <p className="text-slate-300 leading-relaxed mb-8 text-lg">
+                Upload your dataset, select your target, and let our AutoML platform build, evaluate, and deploy production-ready machine learning models — all in minutes. No coding required.
+              </p>
+              <ul className="space-y-3 mb-10">
+                {[
+                  "Automated feature engineering & model selection",
+                  "One-click model deployment & API generation",
+                  "Supports classification, regression & clustering",
+                  "Built-in explainability & performance metrics",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-slate-300 text-sm">
+                    <span className="h-5 w-5 rounded-full bg-green-400/20 text-green-400 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://www.pyrunai.online"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-green-400 text-green-900 hover:bg-green-300 rounded-full px-10 py-4 font-semibold transition-all duration-300 hover:-translate-y-1 shadow-lg text-base"
+              >
+                Try PyrunAI AutoML Free <ExternalLink size={18} />
+              </a>
+              <p className="text-slate-400 text-xs mt-4">Visit <span className="text-green-400 font-mono">www.pyrunai.online</span></p>
+            </motion.div>
+            <motion.div {...fadeUp} className="grid grid-cols-2 gap-4">
+              {[
+                { label: "Models Trained", value: "500+", icon: Brain, color: "bg-blue-400/10 text-blue-300" },
+                { label: "Avg. Training Time", value: "< 3 min", icon: Clock, color: "bg-green-400/10 text-green-300" },
+                { label: "Accuracy Boost", value: "35%", icon: TrendingUp, color: "bg-amber-400/10 text-amber-300" },
+                { label: "Datasets Processed", value: "1000+", icon: Database, color: "bg-violet-400/10 text-violet-300" },
+              ].map((stat, i) => (
+                <motion.div key={stat.label} {...stagger} transition={{ duration: 0.4, delay: i * 0.1 }} className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
+                  <div className={`inline-flex items-center justify-center h-12 w-12 rounded-xl ${stat.color} mb-4 mx-auto`}>
+                    <stat.icon size={22} />
+                  </div>
+                  <p className="text-3xl font-bold text-white mb-1">{stat.value}</p>
+                  <p className="text-xs text-slate-400">{stat.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-20 md:py-28 bg-navy-800 relative overflow-hidden">

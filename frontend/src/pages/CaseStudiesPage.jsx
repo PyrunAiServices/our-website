@@ -73,6 +73,44 @@ const caseStudies = [
     },
     services: ["Power BI", "Data Analytics", "AI/ML"],
   },
+  {
+    tag: "Web Development",
+    title: "Colonial Client – Full Business Website",
+    client: "Colonial Business",
+    challenge: "The colonial enterprise client required a modern, professional web presence that could clearly communicate their brand identity and services to potential customers. Their existing setup was outdated and not mobile-friendly.",
+    solution: "We designed and developed a fully responsive, multi-page business website with a clean brand identity, optimized landing pages, fast load times, and seamless navigation — all tailored to resonate with their target audience.",
+    results: [
+      { icon: TrendingUp, metric: "2x", label: "Online Enquiries" },
+      { icon: Target, metric: "100%", label: "Mobile Responsive" },
+      { icon: Clock, metric: "3 weeks", label: "Delivery Time" },
+    ],
+    testimonial: {
+      quote: "PyrunAI delivered exactly what we envisioned — a sleek, professional website that truly represents our brand. The team was responsive, detail-oriented, and exceeded our expectations.",
+      name: "Sanket More",
+      role: "BIM Engineer",
+      img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&q=80",
+    },
+    services: ["Web Development", "UI/UX Design"],
+  },
+  {
+    tag: "Web & App Development",
+    title: "NB Bites – Restaurant Web & App Platform",
+    client: "NB Bites",
+    challenge: "NB Bites, a growing food brand, had no digital presence and was losing customers to competitors with online ordering capabilities. They needed a branded web and mobile solution to capture and retain their audience.",
+    solution: "We delivered a full-stack web and mobile app for NB Bites — featuring an online menu, real-time order management, push notifications, and a sleek branded interface that drives customer loyalty and repeat orders.",
+    results: [
+      { icon: TrendingUp, metric: "2x", label: "Online Orders in Month 1" },
+      { icon: Users, metric: "40%", label: "Increase in Repeat Customers" },
+      { icon: BarChart3, metric: "Live", label: "Order Management System" },
+    ],
+    testimonial: {
+      quote: "Our online orders doubled within the first month after PyrunAI launched our website and app. The experience they built for our customers is seamless and beautiful.",
+      name: "NB Bites",
+      role: "Food & Beverage Brand",
+      img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80",
+    },
+    services: ["Web Development", "App Development", "UI/UX Design"],
+  },
 ];
 
 export default function CaseStudiesPage() {

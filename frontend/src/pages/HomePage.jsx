@@ -113,6 +113,8 @@ const testimonials = [
   { quote: "PyrunAi Services revolutionized our operations with their AI-driven strategies and healthcare dashboard, delivering efficiency and milestones we never imagined.", name: "Kelsey Allen", role: "The EXP Firm", img: "https://www.pyrunai.com/images/kelsy.png" },
   { quote: "PyrunAi's ATS dashboard made hiring effortless and strategic. I gained clarity and confidence in recruitment decisions like never before.", name: "Shaun Ram", role: "Malaysia", img: "https://www.pyrunai.com/images/ke2.png" },
   { quote: "PyrunAi empowered us to dream big and provided the financial intelligence tools to make those dreams a reality. We feel more confident and inspired than ever.", name: "Tony", role: "Business Owner", img: "https://www.pyrunai.com/images/tony.png" },
+  { quote: "PyrunAI delivered exactly what we envisioned — a sleek, professional website that truly represents our brand. The team was responsive, detail-oriented, and exceeded our expectations.", name: "Colonial Client", role: "Business Owner", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&q=80" },
+  { quote: "Our online orders doubled within the first month after PyrunAI launched our website and app. The experience they built for our customers is seamless and beautiful.", name: "NB Bites", role: "Food & Beverage Brand", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80" },
 ];
 
 const stats = [
@@ -460,7 +462,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Desktop grid */}
-          <div className="hidden md:grid gap-8 md:grid-cols-3">
+          <div className="hidden md:grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((t, i) => (
               <motion.div key={t.name} {...stagger} transition={{ duration: 0.4, delay: i * 0.1 }} data-testid={`testimonial-card-${i}`} className="card-hover-tilt bg-white rounded-2xl border border-slate-100 p-8 flex flex-col">
                 <div className="flex gap-1 mb-4">
