@@ -229,7 +229,9 @@ export default function HomePage() {
 
         {/* Slide content */}
         <div className="relative z-[5] max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-20 md:py-28 w-full">
-          <div className="max-w-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* ── Left: Slide Text ── */}
+            <div>
             <motion.div
               key={`tag-${textKey}`}
               initial={{ opacity: 0, y: -10 }}
@@ -293,6 +295,65 @@ export default function HomePage() {
             >
               Trusted by leading enterprises for data-driven transformation
             </motion.p>
+            </div>
+
+            {/* ── Right: AutoML Promo Card ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
+              className="hidden lg:flex flex-col"
+            >
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-7 shadow-2xl">
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="h-10 w-10 rounded-xl bg-green-400/20 border border-green-400/40 flex items-center justify-center shrink-0">
+                    <Brain size={20} className="text-green-400" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono font-semibold text-green-400 tracking-widest uppercase block">Now Live</span>
+                    <h3 className="text-white font-bold text-base leading-tight">PyrunAI AutoML</h3>
+                  </div>
+                </div>
+
+                <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                  Train, evaluate & deploy production-ready ML models in minutes — no code required. Just upload your dataset and go.
+                </p>
+
+                {/* Feature pills */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["Auto Feature Engineering", "One-Click Deploy", "Classification & Regression", "Built-in Explainability"].map((f) => (
+                    <span key={f} className="text-[11px] bg-white/10 border border-white/20 text-gray-200 px-3 py-1 rounded-full">{f}</span>
+                  ))}
+                </div>
+
+                {/* Stats row */}
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  {[
+                    { value: "500+", label: "Models Trained" },
+                    { value: "< 3 min", label: "Avg. Train Time" },
+                    { value: "35%", label: "Accuracy Boost" },
+                  ].map((s) => (
+                    <div key={s.label} className="bg-white/5 rounded-xl p-3 text-center">
+                      <p className="text-white font-bold text-sm">{s.value}</p>
+                      <p className="text-gray-400 text-[10px] mt-0.5">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="https://www.pyrunai.online"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 bg-green-400 hover:bg-green-300 text-green-900 font-semibold text-sm rounded-xl px-6 py-3 transition-all duration-300 hover:-translate-y-0.5 shadow-lg w-full"
+                >
+                  Try PyrunAI AutoML Free <ExternalLink size={15} />
+                </a>
+                <p className="text-center text-[11px] text-gray-400 mt-3 font-mono">www.pyrunai.online</p>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>

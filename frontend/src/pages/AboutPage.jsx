@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Target, Users, Globe, ArrowRight, Lightbulb, TrendingUp, ShieldCheck } from "lucide-react";
+import { Globe, ArrowRight, Lightbulb, TrendingUp, ShieldCheck, Linkedin } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -21,36 +21,42 @@ const leaders = [
     role: "Founder",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2F3343258175734c8c910f67a735acc43f?format=webp&width=200",
     bio: "Leads with a strong vision for AI-driven growth. His leadership empowers teams to turn data into real business impact.",
+    linkedin: "https://www.linkedin.com/in/niraj-bhavsar/",
   },
   {
     name: "Rushikesh Kunde",
     role: "Co-Founder",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2Fbef7aea6cd564fb083c4a6390d3997b6?format=webp&width=200",
     bio: "Leads with strong analytical insight. He turns data into clear, actionable business decisions.",
+    linkedin: "https://www.linkedin.com/in/rushikesh-kunde/",
   },
   {
     name: "Vijay H",
     role: "Co-Founder",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2F3134e5195a08438eba3d5c3e4114944e?format=webp&width=200",
     bio: "Leads with expertise in Power BI solutions. He specializes in creating clear, impactful dashboards for smarter decisions.",
+    linkedin: "https://www.linkedin.com/in/vijay-h/",
   },
   {
     name: "Piyush Kadam",
     role: "Chief Executive Officer",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2F07219d94f8a74a40af789e460df025f9?format=webp&width=200",
     bio: "Leads with expertise in Power BI and data analytics. He drives clarity, precision and insight-based decision-making.",
+    linkedin: "https://www.linkedin.com/in/piyush-kadam/",
   },
   {
     name: "Uday Bari",
     role: "Chief Operations Officer",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2Fa9802190262b43fc905443194e138aeb?format=webp&width=200",
     bio: "Leads operations with strong cloud engineering expertise. He ensures smooth, efficient and scalable delivery.",
+    linkedin: "https://www.linkedin.com/in/uday-bari/",
   },
   {
     name: "Yash Tapase",
     role: "Chief Technology Officer",
     img: "https://cdn.builder.io/api/v1/image/assets%2Ffef483de79874379b17b5a8f11228bfc%2F51a0cb2b3bed46839f135551fa05ec5e?format=webp&width=200",
     bio: "Excels in Data Science, AI/ML and software development. He drives smart, scalable tech solutions.",
+    linkedin: "https://www.linkedin.com/in/yash-tapase/",
   },
 ];
 
@@ -180,12 +186,21 @@ export default function AboutPage() {
                 data-testid={`leader-card-${i}`}
                 className="bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="mb-5">
+                <div className="flex items-start justify-between mb-5">
                   <img
                     src={leader.img}
                     alt={leader.name}
                     className="h-20 w-20 rounded-2xl object-cover border-2 border-slate-100 group-hover:border-green-400 transition-colors"
                   />
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${leader.name} on LinkedIn`}
+                    className="h-9 w-9 rounded-xl bg-slate-100 hover:bg-[#0A66C2] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 shrink-0"
+                  >
+                    <Linkedin size={17} />
+                  </a>
                 </div>
                 <h3 className="font-heading font-semibold text-lg text-text-main">{leader.name}</h3>
                 <p className="text-sm font-medium text-navy-800 mb-3">{leader.role}</p>
